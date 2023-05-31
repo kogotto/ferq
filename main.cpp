@@ -1,7 +1,7 @@
 #include <iostream>
 #include <string_view>
 
-#include "work.h"
+#include "frequency.h"
 
 namespace {
 
@@ -24,6 +24,9 @@ int main(int argc, char**argv) {
 
     std::cout << "input file name is \"" << inputFilename << '\"' << '\n';
     std::cout << "output file name is \"" << outputFilename << '\"' << '\n';
+
+    auto frequencyMap = countWordFrequencyInFile(inputFilename);
+    writeToFile(outputFilename, frequencyMap);
 
     return 0;
 }

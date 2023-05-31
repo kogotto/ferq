@@ -1,4 +1,4 @@
-#include "work.h"
+#include "frequency.h"
 
 #include <string>
 #include <optional>
@@ -55,5 +55,13 @@ void work(std::string_view inputFile, std::string_view outputFile) {
         std::cout << "Error: Can not write result" << '\n';
         return;
     }
+}
+
+FrequencyMap countWordFrequencyInFile(std::string_view filename) {
+    return filename.size(); // TODO do actual count
+}
+
+void writeToFile(std::string_view filename, const FrequencyMap &map) {
+    std::cout << "Pretend to write map(" << map << ") to file " << filename << '\n';
 }
 

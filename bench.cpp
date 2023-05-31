@@ -1,6 +1,6 @@
 #include <benchmark/benchmark.h>
 
-#include "work.h"
+#include "frequency.h"
 
 
 namespace {

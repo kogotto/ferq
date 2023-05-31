@@ -8,7 +8,7 @@ set(CMAKE_CXX_STANDARD 17)
 add_executable(
     ${PROJECT_NAME}
     main.cpp
-    work.cpp
+    frequency.cpp
 )
 
 find_package(benchmark)
@@ -16,7 +16,7 @@ if (benchmark_FOUND)
     add_executable(
         benchmark
         bench.cpp
-        work.cpp
+        frequency.cpp
     )
     target_link_libraries(
         benchmark
