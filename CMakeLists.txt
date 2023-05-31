@@ -1,0 +1,27 @@
+cmake_minimum_required(VERSION 3.16.3)
+
+project(freq)
+
+set(CMAKE_EXPORT_COMPILE_COMMANDS TRUE)
+set(CMAKE_CXX_STANDARD 17)
+
+add_executable(
+    ${PROJECT_NAME}
+    main.cpp
+    work.cpp
+)
+
+find_package(benchmark)
+if (benchmark_FOUND)
+    add_executable(
+        benchmark
+        bench.cpp
+        work.cpp
+    )
+    target_link_libraries(
+        benchmark
+        benchmark::benchmark
+    )
+else()
+    message(WARNING "Google benchmark not found. Install it to build benchmark")
+endif()
