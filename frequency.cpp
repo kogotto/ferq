@@ -13,37 +13,6 @@
 
 namespace {
 
-std::optional<std::string> loadFile(std::string_view inputFile) {
-    std::ifstream stream(inputFile.data());
-    if (!stream.is_open()) {
-        return std::nullopt;
-    }
-
-    std::stringstream out;
-    std::string line;
-
-    while (getline(stream, line)) {
-        out << std::move(line);
-    }
-
-    return out.str();
-}
-
-std::string doSomethingUsefull(std::string str) {
-    return str;
-}
-
-bool writeFile(std::string_view filename, const std::string& str) {
-    std::ofstream stream(filename.data());
-    if (!stream.is_open()) {
-        return false;
-    }
-
-    stream << str;
-
-    return true;
-}
-
 std::string loadText(std::string_view filename) {
     std::filesystem::path path{filename};
     if (!exists(path)) {
@@ -197,21 +166,5 @@ void writeWordsToFile(std::string_view filename, const Words& words) {
     const FrequencyMap frequencyMap = convertToFrequencyMap(words.getRaw());
     writeFrequencyMapToFile(filename, frequencyMap);
     std::cout << words.getText() << '\n';
-}
-
-void work(std::string_view inputFile, std::string_view outputFile) {
-    auto input = loadFile(inputFile);
-    if (!input) {
-        std::cout << "Error: Can not open file " << inputFile << '\n';
-        return;
-    }
-
-    auto result = doSomethingUsefull(std::move(input).value());
-
-    bool writeResult = writeFile(outputFile, result);
-    if (!writeResult) {
-        std::cout << "Error: Can not write result" << '\n';
-        return;
-    }
 }
 

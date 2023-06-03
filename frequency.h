@@ -4,8 +4,6 @@
 #include <string_view>
 #include <unordered_map>
 
-void work(std::string_view inputFile, std::string_view outputFile);
-
 class Words {
 public:
     using Raw = std::unordered_map<std::string_view, int>;

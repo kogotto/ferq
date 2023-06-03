@@ -1,5 +1,7 @@
 #include <benchmark/benchmark.h>
 
+#include <string>
+
 #include "frequency.h"
 
 
@@ -7,7 +9,8 @@ namespace {
 
 void properBenchWork(benchmark::State& state) {
     for (int i = 0; state.KeepRunning(); ++i) {
-        work("input", "out/" + std::to_string(i));
+        auto res = std::to_string(i);
+        benchmark::DoNotOptimize(res);
     }
 }
 
