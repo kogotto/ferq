@@ -158,7 +158,7 @@ Words::Words(std::string inText)
 {
 }
 
-Words countWordFrequencyInFile(std::string_view filename) {
+Words countWordsInFile(std::string_view filename) {
     return {loadText(filename)};
 }
 

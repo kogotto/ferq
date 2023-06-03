@@ -23,5 +23,5 @@ private:
     const Raw raw;
 };
 
-Words countWordFrequencyInFile(std::string_view filename);
+Words countWordsInFile(std::string_view filename);
 void writeWordsToFile(std::string_view filename, const Words& words);
