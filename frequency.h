@@ -12,6 +12,10 @@ public:
 
     Words(std::string text);
 
+    const std::string& getText() const {
+        return text;
+    }
+
     const Raw& getRaw() const {
         return raw;
     }

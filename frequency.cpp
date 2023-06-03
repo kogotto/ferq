@@ -3,6 +3,7 @@
 #include <string>
 #include <optional>
 #include <vector>
+#include <filesystem>
 #include <fstream>
 #include <sstream>
 #include <iostream>
@@ -41,7 +42,22 @@ bool writeFile(std::string_view filename, const std::string& str) {
 }
 
 std::string loadText(std::string_view filename) {
-    return static_cast<std::string>(filename) + "some very very very long string to supress short string optimization";  // TODO read all file
+    std::filesystem::path path{filename};
+    if (!exists(path)) {
+        return {};
+    }
+
+    std::ifstream stream(filename.data());
+    if (!stream.is_open()) {
+        return {};
+    }
+
+    std::string result;
+    result.reserve(file_size(path));
+
+    getline(stream, result, {});
+
+    return result;
 }
 
 Words::Raw countWords(const std::string& text) {
@@ -104,7 +120,7 @@ Words countWordFrequencyInFile(std::string_view filename) {
 void writeWordsToFile(std::string_view filename, const Words& words) {
     const FrequencyMap frequencyMap = convertToFrequencyMap(words.getRaw());
     writeFrequencyMapToFile(filename, frequencyMap);
-    std::cout << "Pretend to write map(" << words.getRaw().size() << ") to file " << filename << '\n';
+    std::cout << words.getText() << '\n';
 }
 
 void work(std::string_view inputFile, std::string_view outputFile) {
