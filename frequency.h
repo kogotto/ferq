@@ -10,6 +10,12 @@ public:
 
     Words(std::string text);
 
+    Words(const Words&) = delete;
+    Words(Words&&) = default;
+
+    Words& operator=(const Words&) = delete;
+    Words& operator=(Words&&) = delete;
+
     const std::string& getText() const {
         return text;
     }

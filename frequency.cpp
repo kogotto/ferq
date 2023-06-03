@@ -3,6 +3,7 @@
 #include <cassert>
 #include <cctype>
 
+#include <algorithm>
 #include <string>
 #include <optional>
 #include <vector>
@@ -110,6 +111,11 @@ std::ostream& operator<<(std::ostream& stream, const Words::Raw& words) {
 }
 
 struct Frequency {
+    Frequency(int count, std::string_view word)
+        : count(count)
+        , word(word)
+    {}
+
     int count;
     std::string_view word;
 };
