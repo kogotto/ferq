@@ -143,9 +143,18 @@ std::ostream& operator<<(std::ostream& stream, const Words::Raw& words) {
 struct Frequency {
     int count;
     std::string_view word;
-
-    friend auto operator<=>(const Frequency& lhs, const Frequency& rhs) = default;
 };
+
+bool operator<(const Frequency& lhs, const Frequency& rhs) {
+    if (lhs.count != rhs.count) {
+        // This sign is inverted because
+        // words with more count should appear higher
+        return lhs.count > rhs.count;
+    }
+    // This sign is not inverted because
+    // words with same count should appear in alphabetical order
+    return lhs.word < rhs.word;
+}
 
 using FrequencyMap = std::vector<Frequency>;
 
@@ -155,6 +164,7 @@ auto convertToFrequencyMap(const Words::Raw& words) {
     for ( const auto& [word, count] : words ) {
         result.emplace_back(count, word);
     }
+    std::sort(result.begin(), result.end());
     return result;
 }
 
