@@ -57,6 +57,6 @@ compile_commands.json
 *.vim
 
 # Data #
-input
-output
+input*
+output*
 out/
