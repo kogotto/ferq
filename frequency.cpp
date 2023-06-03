@@ -1,5 +1,8 @@
 #include "frequency.h"
 
+#include <cassert>
+#include <cctype>
+
 #include <string>
 #include <optional>
 #include <vector>
@@ -60,11 +63,74 @@ std::string loadText(std::string_view filename) {
     return result;
 }
 
+inline bool isAlpha(unsigned char c) {
+    return std::isalpha(c);
+}
+
+inline bool isNotAlpha(unsigned char c) {
+    return !isAlpha(c);
+}
+
+template <typename Pred>
+size_t nextCharacter(const std::string& text, size_t start, Pred pred) {
+    const auto size = text.size();
+    for (size_t i = start; i < size; ++i) {
+        if (pred(text[i])) {
+            return i;
+        }
+    }
+    return size;
+}
+
+size_t nextNonAlpha(const std::string& text, size_t start) {
+    return nextCharacter(text, start, isNotAlpha);
+}
+
+size_t nextAlpha(const std::string& text, size_t start) {
+    return nextCharacter(text, start, isAlpha);
+}
+
+class WordExtracter {
+public:
+    WordExtracter(const std::string& text)
+        : text(text)
+        , pos(nextAlpha(text, 0))
+    {}
+
+    // Returns next word or std::nullopt if end of string reached
+    std::optional<std::string_view> nextWord() {
+        if (pos == text.size()) {
+            return std::nullopt;
+        }
+
+        assert(isAlpha(text[pos]));
+
+        auto firstNonAlpha = nextNonAlpha(text, pos);
+        const auto length = firstNonAlpha - pos;
+        std::string_view result{&text[pos], length};
+
+        pos = nextAlpha(text, firstNonAlpha);
+
+        return result;
+    }
+
+private:
+    const std::string& text;
+    size_t pos;
+};
+
 Words::Raw countWords(const std::string& text) {
-    return {
-        { text, 666 },
-        {"some", 777},
-    };
+    Words::Raw result;
+
+    WordExtracter wordExtracter(text);
+
+    for (auto word = wordExtracter.nextWord();
+            static_cast<bool>(word);
+            word = wordExtracter.nextWord()) {
+        ++result[*word];
+    }
+
+    return result;
 }
 
 std::ostream& operator<<(std::ostream& stream, const Words::Raw& words) {
