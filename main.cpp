@@ -25,8 +25,8 @@ int main(int argc, char**argv) {
     std::cout << "input file name is \"" << inputFilename << '\"' << '\n';
     std::cout << "output file name is \"" << outputFilename << '\"' << '\n';
 
-    auto frequencyMap = countWordFrequencyInFile(inputFilename);
-    writeToFile(outputFilename, frequencyMap);
+    auto words = countWordFrequencyInFile(inputFilename);
+    writeWordsToFile(outputFilename, words);
 
     return 0;
 }
