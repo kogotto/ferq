@@ -3,6 +3,7 @@
 #include <string>
 #include <string_view>
 #include <unordered_map>
+#include <filesystem>
 
 class Words {
 public:
@@ -34,3 +35,5 @@ Words countWordsInFile(std::string_view filename);
 void writeWordsToFile(std::string_view filename, const Words& words);
 void countWordsAndWrite(std::string_view inputFilename,
                         std::string_view outputFilename);
+void countWordsAndWrite(std::filesystem::path inputFilename,
+                        std::filesystem::path outputFilename);

@@ -175,7 +175,6 @@ Words countWordsInFile(std::string_view filename) {
 void writeWordsToFile(std::string_view filename, const Words& words) {
     const FrequencyMap frequencyMap = convertToFrequencyMap(words.getRaw());
     writeFrequencyMapToFile(filename, frequencyMap);
-    std::cout << words.getText() << '\n';
 }
 
 void countWordsAndWrite(std::string_view inputFilename,
@@ -184,3 +183,10 @@ void countWordsAndWrite(std::string_view inputFilename,
     writeWordsToFile(outputFilename, words);
 }
 
+void countWordsAndWrite(std::filesystem::path inputFilename,
+                        std::filesystem::path outputFilename) {
+    countWordsAndWrite(
+        std::string_view(inputFilename.c_str()),
+        std::string_view(outputFilename.c_str())
+    );
+}
