@@ -10,6 +10,7 @@ add_executable(
     ${PROJECT_NAME}
     main.cpp
     frequency.cpp
+    word_extracter.cpp
 )
 
 find_package(benchmark)
@@ -19,6 +20,7 @@ if (benchmark_FOUND)
         bench.cpp
         bench_helpers.cpp
         frequency.cpp
+        word_extracter.cpp
     )
     target_link_libraries(
         benchmark
