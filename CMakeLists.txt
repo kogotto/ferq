@@ -6,11 +6,20 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS TRUE)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED true)
 
+add_library(
+    core STATIC
+    frequency.cpp
+    word_extracter.cpp
+)
+
 add_executable(
     ${PROJECT_NAME}
     main.cpp
-    frequency.cpp
-    word_extracter.cpp
+)
+
+target_link_libraries(
+    ${PROJECT_NAME}
+    core
 )
 
 find_package(benchmark)
@@ -19,11 +28,10 @@ if (benchmark_FOUND)
         benchmark
         bench.cpp
         bench_helpers.cpp
-        frequency.cpp
-        word_extracter.cpp
     )
     target_link_libraries(
         benchmark
+        core
         benchmark::benchmark
     )
 else()
