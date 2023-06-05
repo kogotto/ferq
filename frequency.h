@@ -31,9 +31,7 @@ private:
 };
 
 Words countWordsInText(std::string text);
-Words countWordsInFile(std::string_view filename);
-void writeWordsToFile(std::string_view filename, const Words& words);
-void countWordsAndWrite(std::string_view inputFilename,
-                        std::string_view outputFilename);
+Words countWordsInFile(const std::filesystem::path& filename);
+void writeWordsToFile(const std::filesystem::path& filename, const Words& words);
 void countWordsAndWrite(const std::filesystem::path& inputFilename,
                         const std::filesystem::path& outputFilename);
