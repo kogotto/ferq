@@ -22,9 +22,6 @@ int main(int argc, char**argv) {
     const std::string_view inputFilename = argv[1];
     const std::string_view outputFilename = argv[2];
 
-    std::cout << "input file name is \"" << inputFilename << '\"' << '\n';
-    std::cout << "output file name is \"" << outputFilename << '\"' << '\n';
-
     countWordsAndWrite(inputFilename, outputFilename);
 
     return 0;

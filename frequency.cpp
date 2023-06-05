@@ -183,8 +183,8 @@ void countWordsAndWrite(std::string_view inputFilename,
     writeWordsToFile(outputFilename, words);
 }
 
-void countWordsAndWrite(std::filesystem::path inputFilename,
-                        std::filesystem::path outputFilename) {
+void countWordsAndWrite(const std::filesystem::path& inputFilename,
+                        const std::filesystem::path& outputFilename) {
     countWordsAndWrite(
         std::string_view(inputFilename.c_str()),
         std::string_view(outputFilename.c_str())

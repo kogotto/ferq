@@ -35,5 +35,5 @@ Words countWordsInFile(std::string_view filename);
 void writeWordsToFile(std::string_view filename, const Words& words);
 void countWordsAndWrite(std::string_view inputFilename,
                         std::string_view outputFilename);
-void countWordsAndWrite(std::filesystem::path inputFilename,
-                        std::filesystem::path outputFilename);
+void countWordsAndWrite(const std::filesystem::path& inputFilename,
+                        const std::filesystem::path& outputFilename);
