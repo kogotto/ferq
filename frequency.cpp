@@ -11,6 +11,15 @@
 
 namespace {
 
+void toLower(std::string& str) {
+    std::transform(
+        str.begin(), str.end(), str.begin(),
+        [] (unsigned char c) {
+            return std::tolower(c);
+        }
+    );
+}
+
 std::string loadText(const std::filesystem::path& filename) {
     if (!exists(filename)) {
         return {};
@@ -25,6 +34,7 @@ std::string loadText(const std::filesystem::path& filename) {
     result.reserve(file_size(filename));
 
     getline(stream, result, {});
+    toLower(result);
 
     return result;
 }
