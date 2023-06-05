@@ -17,6 +17,7 @@ if (benchmark_FOUND)
     add_executable(
         benchmark
         bench.cpp
+        bench_helpers.cpp
         frequency.cpp
     )
     target_link_libraries(
