@@ -25,8 +25,7 @@ int main(int argc, char**argv) {
     std::cout << "input file name is \"" << inputFilename << '\"' << '\n';
     std::cout << "output file name is \"" << outputFilename << '\"' << '\n';
 
-    auto words = countWordsInFile(inputFilename);
-    writeWordsToFile(outputFilename, words);
+    countWordsAndWrite(inputFilename, outputFilename);
 
     return 0;
 }

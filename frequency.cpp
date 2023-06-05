@@ -164,13 +164,23 @@ Words::Words(std::string inText)
 {
 }
 
+Words countWordsInText(std::string text) {
+    return {std::move(text)};
+}
+
 Words countWordsInFile(std::string_view filename) {
-    return {loadText(filename)};
+    return countWordsInText(loadText(filename));
 }
 
 void writeWordsToFile(std::string_view filename, const Words& words) {
     const FrequencyMap frequencyMap = convertToFrequencyMap(words.getRaw());
     writeFrequencyMapToFile(filename, frequencyMap);
     std::cout << words.getText() << '\n';
+}
+
+void countWordsAndWrite(std::string_view inputFilename,
+                        std::string_view outputFilename) {
+    auto words = countWordsInFile(inputFilename);
+    writeWordsToFile(outputFilename, words);
 }
 

@@ -29,5 +29,8 @@ private:
     const Raw raw;
 };
 
+Words countWordsInText(std::string text);
 Words countWordsInFile(std::string_view filename);
 void writeWordsToFile(std::string_view filename, const Words& words);
+void countWordsAndWrite(std::string_view inputFilename,
+                        std::string_view outputFilename);
