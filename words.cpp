@@ -2,10 +2,10 @@
 
 #include "word_extracter.h"
 
-namespace {
+namespace impl {
 
-Words::Raw countWords(const std::string& text) {
-    Words::Raw result;
+RawWords countWords(std::string_view text) {
+    RawWords result;
 
     WordExtracter wordExtracter(text);
 
@@ -18,10 +18,4 @@ Words::Raw countWords(const std::string& text) {
     return result;
 }
 
-}
-
-Words::Words(std::string inText)
-    : text(std::move(inText))
-    , raw(countWords(text))
-{
-}
+} // namespace impl

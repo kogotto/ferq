@@ -4,11 +4,22 @@
 #include <string_view>
 #include <unordered_map>
 
+using RawWords = std::unordered_map<std::string_view, int>;
+
+namespace impl {
+RawWords countWords(std::string_view text);
+} // namespace impl
+
+inline std::string_view toStringView(std::string& text) {
+    return text;
+}
+
+template <typename String>
 class Words {
 public:
-    using Raw = std::unordered_map<std::string_view, int>;
+    using Raw = RawWords;
 
-    Words(std::string text);
+    Words(String text);
 
     Words(const Words&) = delete;
     Words(Words&&) = default;
@@ -25,6 +36,13 @@ public:
     }
 
 private:
-    const std::string text;
+    String text;
     const Raw raw;
 };
+
+template <typename String>
+Words<String>::Words(String inText)
+    : text(std::move(inText))
+    , raw(impl::countWords(toStringView(text)))
+{
+}

@@ -40,7 +40,7 @@ std::string loadText(const std::filesystem::path& filename) {
     return result;
 }
 
-std::ostream& operator<<(std::ostream& stream, const Words::Raw& words) {
+std::ostream& operator<<(std::ostream& stream, const RawWords& words) {
     for (const auto& [count, word] : words) {
         stream << count << ' ' << word << '\n';
     }
@@ -70,7 +70,7 @@ bool operator<(const Frequency& lhs, const Frequency& rhs) {
 
 using FrequencyMap = std::vector<Frequency>;
 
-auto convertToFrequencyMap(const Words::Raw& words) {
+auto convertToFrequencyMap(const RawWords& words) {
     FrequencyMap result;
     result.reserve(words.size());
     for ( const auto& [word, count] : words ) {
@@ -94,11 +94,13 @@ void writeFrequencyMapToFile(const std::filesystem::path& filename,
     }
 }
 
-Words countWordsInText(std::string text) {
+using WordsOverString = Words<std::string>;
+
+WordsOverString countWordsInText(std::string text) {
     return {std::move(text)};
 }
 
-void writeWordsToFile(const std::filesystem::path& filename, const Words& words) {
+void writeWordsToFile(const std::filesystem::path& filename, const WordsOverString& words) {
     const FrequencyMap frequencyMap = convertToFrequencyMap(words.getRaw());
     writeFrequencyMapToFile(filename, frequencyMap);
 }
