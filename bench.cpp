@@ -21,7 +21,7 @@ void teardownBenchWithStringview(const benchmark::State&) {
 void benchmarkWithStringView(benchmark::State& state) {
     const auto outPath = fullOutPath(stringviewPrefix);
     for (int i = 0; state.KeepRunning(); ++i) {
-        countWordsAndWrite(
+        countWordsAndWriteFirst(
             "input",
             outPath / std::to_string(i)
         );

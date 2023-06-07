@@ -105,8 +105,8 @@ void writeWordsToFile(const std::filesystem::path& filename, const Words& words)
 
 } // namespace
 
-void countWordsAndWrite(const std::filesystem::path& inputFilename,
-                        const std::filesystem::path& outputFilename) {
+void countWordsAndWriteFirst(const std::filesystem::path& inputFilename,
+                             const std::filesystem::path& outputFilename) {
     auto text = loadText(inputFilename);
     auto words = countWordsInText(std::move(text));
     writeWordsToFile(outputFilename, words);

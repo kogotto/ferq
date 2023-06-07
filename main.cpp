@@ -22,7 +22,7 @@ int main(int argc, char**argv) {
     const std::string_view inputFilename = argv[1];
     const std::string_view outputFilename = argv[2];
 
-    countWordsAndWrite(inputFilename, outputFilename);
+    countWordsAndWriteFirst(inputFilename, outputFilename);
 
     return 0;
 }
