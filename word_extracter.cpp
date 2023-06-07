@@ -14,7 +14,7 @@ inline bool isNotAlpha(unsigned char c) {
 }
 
 template <typename Pred>
-size_t nextCharacter(const std::string& text, size_t start, Pred pred) {
+size_t nextCharacter(std::string_view text, size_t start, Pred pred) {
     const auto size = text.size();
     for (size_t i = start; i < size; ++i) {
         if (pred(text[i])) {
@@ -24,17 +24,17 @@ size_t nextCharacter(const std::string& text, size_t start, Pred pred) {
     return size;
 }
 
-size_t nextNonAlpha(const std::string& text, size_t start) {
+size_t nextNonAlpha(std::string_view text, size_t start) {
     return nextCharacter(text, start, isNotAlpha);
 }
 
-size_t nextAlpha(const std::string& text, size_t start) {
+size_t nextAlpha(std::string_view text, size_t start) {
     return nextCharacter(text, start, isAlpha);
 }
 
 } // namespace
 
-WordExtracter::WordExtracter(const std::string& text)
+WordExtracter::WordExtracter(std::string_view text)
     : text(text)
     , pos(nextAlpha(text, 0))
 {}
