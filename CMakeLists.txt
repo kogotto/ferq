@@ -13,6 +13,7 @@ add_library(
     frequency.cpp
     word_extracter.cpp
     words.cpp
+    writewords.cpp
 )
 target_link_libraries(
     core
