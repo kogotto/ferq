@@ -30,8 +30,5 @@ private:
     const Raw raw;
 };
 
-Words countWordsInText(std::string text);
-Words countWordsInFile(const std::filesystem::path& filename);
-void writeWordsToFile(const std::filesystem::path& filename, const Words& words);
 void countWordsAndWrite(const std::filesystem::path& inputFilename,
                         const std::filesystem::path& outputFilename);

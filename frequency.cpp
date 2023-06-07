@@ -107,6 +107,15 @@ void writeFrequencyMapToFile(const std::filesystem::path& filename,
     }
 }
 
+Words countWordsInText(std::string text) {
+    return {std::move(text)};
+}
+
+void writeWordsToFile(const std::filesystem::path& filename, const Words& words) {
+    const FrequencyMap frequencyMap = convertToFrequencyMap(words.getRaw());
+    writeFrequencyMapToFile(filename, frequencyMap);
+}
+
 } // namespace
 
 Words::Words(std::string inText)
@@ -115,21 +124,9 @@ Words::Words(std::string inText)
 {
 }
 
-Words countWordsInText(std::string text) {
-    return {std::move(text)};
-}
-
-Words countWordsInFile(const std::filesystem::path& filename) {
-    return countWordsInText(loadText(filename));
-}
-
-void writeWordsToFile(const std::filesystem::path& filename, const Words& words) {
-    const FrequencyMap frequencyMap = convertToFrequencyMap(words.getRaw());
-    writeFrequencyMapToFile(filename, frequencyMap);
-}
-
 void countWordsAndWrite(const std::filesystem::path& inputFilename,
                         const std::filesystem::path& outputFilename) {
-    auto words = countWordsInFile(inputFilename);
+    auto text = loadText(inputFilename);
+    auto words = countWordsInText(std::move(text));
     writeWordsToFile(outputFilename, words);
 }
