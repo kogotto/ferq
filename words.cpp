@@ -1,5 +1,7 @@
 #include "words.h"
 
+#include <iostream>
+
 #include "word_extracter.h"
 
 namespace impl {
@@ -16,6 +18,13 @@ RawWords countWords(std::string_view text) {
     }
 
     return result;
+}
+
+std::ostream& operator<<(std::ostream& stream, const RawWords& words) {
+    for (const auto& [count, word] : words) {
+        stream << count << ' ' << word << '\n';
+    }
+    return stream;
 }
 
 } // namespace impl

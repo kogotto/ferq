@@ -5,6 +5,7 @@
 #include <unordered_map>
 
 using RawWords = std::unordered_map<std::string_view, int>;
+std::ostream& operator<<(std::ostream& stream, const RawWords& words);
 
 namespace impl {
 RawWords countWords(std::string_view text);

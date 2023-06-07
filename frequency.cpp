@@ -40,13 +40,6 @@ std::string loadText(const std::filesystem::path& filename) {
     return result;
 }
 
-std::ostream& operator<<(std::ostream& stream, const RawWords& words) {
-    for (const auto& [count, word] : words) {
-        stream << count << ' ' << word << '\n';
-    }
-    return stream;
-}
-
 struct Frequency {
     Frequency(int count, std::string_view word)
         : count(count)
