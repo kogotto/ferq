@@ -8,6 +8,7 @@
 #include <iostream>
 
 #include "word_extracter.h"
+#include "words.h"
 
 namespace {
 
@@ -35,20 +36,6 @@ std::string loadText(const std::filesystem::path& filename) {
 
     getline(stream, result, {});
     toLower(result);
-
-    return result;
-}
-
-Words::Raw countWords(const std::string& text) {
-    Words::Raw result;
-
-    WordExtracter wordExtracter(text);
-
-    for (auto word = wordExtracter.nextWord();
-            static_cast<bool>(word);
-            word = wordExtracter.nextWord()) {
-        ++result[*word];
-    }
 
     return result;
 }
@@ -117,12 +104,6 @@ void writeWordsToFile(const std::filesystem::path& filename, const Words& words)
 }
 
 } // namespace
-
-Words::Words(std::string inText)
-    : text(std::move(inText))
-    , raw(countWords(text))
-{
-}
 
 void countWordsAndWrite(const std::filesystem::path& inputFilename,
                         const std::filesystem::path& outputFilename) {

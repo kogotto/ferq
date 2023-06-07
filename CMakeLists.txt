@@ -12,6 +12,7 @@ add_library(
     core STATIC
     frequency.cpp
     word_extracter.cpp
+    words.cpp
 )
 target_link_libraries(
     core
