@@ -6,10 +6,16 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS TRUE)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED true)
 
+find_package(Boost REQUIRED COMPONENTS iostreams)
+
 add_library(
     core STATIC
     frequency.cpp
     word_extracter.cpp
+)
+target_link_libraries(
+    core
+    Boost::iostreams
 )
 
 add_executable(
