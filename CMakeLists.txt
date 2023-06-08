@@ -11,6 +11,7 @@ find_package(Boost REQUIRED COMPONENTS iostreams)
 add_library(
     core STATIC
     frequency.cpp
+    second.cpp
     word_extracter.cpp
     words.cpp
     writewords.cpp
