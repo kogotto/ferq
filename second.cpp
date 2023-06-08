@@ -1,16 +1,23 @@
 #include "second.h"
 
-#include <string>
+#include <boost/iostreams/device/mapped_file.hpp>
+
+#include "words.h"
+#include "writewords.h"
 
 namespace {
 
-auto loadText(const std::filesystem::path& inputFilename) {
-    // TODO replace with mmap
-    return inputFilename.string();
+using Mmap = boost::iostreams::mapped_file_source;
+
+Mmap loadText(const std::filesystem::path& inputFilename) {
+    Mmap result(inputFilename, Mmap::readonly);
+    return result;
 }
 
-auto countWordsInText(std::string text) {
-    return text;
+using WordsOverMmap = Words<Mmap>;
+
+WordsOverMmap countWordsInText(Mmap text) {
+    return std::move(text);
 }
 
 }
@@ -19,4 +26,5 @@ void countWordsAndWriteSecond(const std::filesystem::path &inputFilename,
                               const std::filesystem::path &outputFilename) {
     auto text = loadText(inputFilename);
     auto words = countWordsInText(std::move(text));
+    writeWordsToFile(outputFilename, words.getRaw());
 }

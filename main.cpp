@@ -2,6 +2,7 @@
 #include <string_view>
 
 #include "frequency.h"
+#include "second.h"
 
 namespace {
 
@@ -22,7 +23,9 @@ int main(int argc, char**argv) {
     const std::string_view inputFilename = argv[1];
     const std::string_view outputFilename = argv[2];
 
-    countWordsAndWriteFirst(inputFilename, outputFilename);
+    /* countWordsAndWriteFirst(inputFilename, outputFilename); */
+
+    countWordsAndWriteSecond(inputFilename, outputFilename);
 
     return 0;
 }

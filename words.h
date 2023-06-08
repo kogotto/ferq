@@ -3,6 +3,7 @@
 #include <string>
 #include <string_view>
 #include <unordered_map>
+#include <boost/iostreams/device/mapped_file.hpp>
 
 using RawWords = std::unordered_map<std::string_view, int>;
 std::ostream& operator<<(std::ostream& stream, const RawWords& words);
@@ -14,6 +15,14 @@ RawWords countWords(std::string_view text);
 inline std::string_view toStringView(std::string& text) {
     return text;
 }
+
+inline std::string_view toStringView(const boost::iostreams::mapped_file_source& mmap) {
+    return {
+        mmap.data(),
+        mmap.size()
+    };
+}
+
 
 template <typename String>
 class Words {
