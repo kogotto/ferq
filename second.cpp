@@ -7,7 +7,7 @@
 
 namespace {
 
-using Mmap = boost::iostreams::mapped_file_source;
+using Mmap = boost::iostreams::mapped_file;
 
 Mmap loadText(const std::filesystem::path& inputFilename) {
     Mmap result(inputFilename, Mmap::readonly);

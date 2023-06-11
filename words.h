@@ -16,9 +16,9 @@ inline std::string_view toStringView(std::string& text) {
     return text;
 }
 
-inline std::string_view toStringView(const boost::iostreams::mapped_file_source& mmap) {
+inline std::string_view toStringView(const boost::iostreams::mapped_file& mmap) {
     return {
-        mmap.data(),
+        mmap.const_data(),
         mmap.size()
     };
 }
