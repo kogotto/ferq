@@ -37,10 +37,6 @@ public:
     Words& operator=(const Words&) = delete;
     Words& operator=(Words&&) = delete;
 
-    const std::string& getText() const {
-        return text;
-    }
-
     const Raw& getRaw() const {
         return raw;
     }

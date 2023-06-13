@@ -48,7 +48,7 @@ std::optional<std::string_view> WordExtracter::nextWord() {
 
     auto firstNonAlpha = nextNonAlpha(text, pos);
     const auto length = firstNonAlpha - pos;
-    std::string_view result{&text[pos], length};
+    std::string_view result = text.substr(pos, length);
 
     pos = nextAlpha(text, firstNonAlpha);
 
