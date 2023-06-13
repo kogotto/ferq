@@ -14,7 +14,7 @@ RawWords countWords(std::string_view text) {
     for (auto word = wordExtracter.nextWord();
             static_cast<bool>(word);
             word = wordExtracter.nextWord()) {
-        ++result[*word];
+        ++result[fromStd(*word)];
     }
 
     return result;

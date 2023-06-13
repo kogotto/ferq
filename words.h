@@ -5,7 +5,10 @@
 #include <unordered_map>
 #include <boost/iostreams/device/mapped_file.hpp>
 
-using RawWords = std::unordered_map<std::string_view, int>;
+#include "cistring_view.h"
+
+using RawWords = std::unordered_map<CIStringView, int>;
+
 std::ostream& operator<<(std::ostream& stream, const RawWords& words);
 
 namespace impl {

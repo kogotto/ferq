@@ -8,13 +8,16 @@
 namespace {
 
 struct Frequency {
-    Frequency(int count, std::string_view word)
+    using Word = RawWords::key_type;
+    using Count = RawWords::mapped_type;
+
+    Frequency(Count count, Word word)
         : count(count)
         , word(word)
     {}
 
-    int count;
-    std::string_view word;
+    Count count;
+    Word word;
 };
 
 bool operator<(const Frequency& lhs, const Frequency& rhs) {
