@@ -5,6 +5,13 @@
 #include "words.h"
 #include "writewords.h"
 
+template <>
+struct Traits<CIStringView> {
+    static CIStringView fromStd(std::string_view sv) {
+        return {sv.data(), sv.size()};
+    }
+};
+
 namespace {
 
 using Mmap = boost::iostreams::mapped_file;
@@ -14,7 +21,7 @@ Mmap loadText(const std::filesystem::path& inputFilename) {
     return result;
 }
 
-using WordsOverMmap = Words<Mmap>;
+using WordsOverMmap = Words<Mmap, CIStringView>;
 
 WordsOverMmap countWordsInText(Mmap text) {
     return std::move(text);

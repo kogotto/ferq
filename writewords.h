@@ -4,5 +4,8 @@
 
 #include "words.h"
 
+template <typename StringView>
 void writeWordsToFile(const std::filesystem::path& filename,
-                      const RawWords& words);
+                      const RawWords<StringView>& words);
+
+#include "writewords.hpp"

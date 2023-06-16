@@ -7,6 +7,13 @@
 
 #include "writewords.h"
 
+template <>
+struct Traits<std::string_view> {
+    static std::string_view fromStd(std::string_view sv) {
+        return sv;
+    }
+};
+
 namespace {
 
 void toLower(std::string& str) {
@@ -37,7 +44,7 @@ std::string loadText(const std::filesystem::path& filename) {
     return result;
 }
 
-using WordsOverString = Words<std::string>;
+using WordsOverString = Words<std::string, std::string_view>;
 
 WordsOverString countWordsInText(std::string text) {
     return {std::move(text)};

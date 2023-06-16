@@ -13,6 +13,7 @@ add_library(
     frequency.cpp
     second.cpp
     word_extracter.cpp
+    raw_words.cpp
     words.cpp
     writewords.cpp
 )
