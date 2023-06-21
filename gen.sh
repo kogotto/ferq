@@ -1,6 +1,15 @@
 #!/bin/bash
 
-mkdir -p build;
-# cmake -B build/ -S . -DCMAKE_BUILD_TYPE=Release;
-cmake -B build/ -S . -DCMAKE_BUILD_TYPE=Debug;
-ln -fs build/compile_commands.json .
+BUILD_DIR="build"
+OPTIONS="
+-DCMAKE_EXPORT_COMPILE_COMMANDS=1
+-DCMAKE_CXX_COMPILER_LAUNCHER=ccache
+"
+OPTIONS+="-DCMAKE_BUILD_TYPE=Debug"
+# OPTIONS+="-DCMAKE_BUILD_TYPE=Release"
+
+mkdir $BUILD_DIR;
+
+cmake -S . -B $BUILD_DIR $OPTIONS;
+
+ln -fs $BUILD_DIR/compile_commands.json .;
