@@ -4,8 +4,10 @@
 #include <filesystem>
 
 #include "bench_helpers.h"
+
 #include "frequency.h"
 #include "second.h"
+#include "third.h"
 
 namespace {
 
@@ -62,5 +64,33 @@ void benchmarkWithMmap(benchmark::State& state) {
 BENCHMARK(benchmarkWithMmap)->
     Setup(setupBenchWithMmap)->
     Teardown(teardownBenchWithMmap);
+
+namespace {
+
+constexpr std::string_view onlyVectorPrefix = "only-vector";
+
+void setupBenchWithOnlyVector(const benchmark::State&) {
+    setup(onlyVectorPrefix);
+}
+
+void teardownBenchWithOnlyVector(const benchmark::State&) {
+    teardown(onlyVectorPrefix);
+}
+
+void benchmarkWithOnlyVector(benchmark::State& state) {
+    const auto outPath = fullOutPath(onlyVectorPrefix);
+    for (int i = 0; state.KeepRunning(); ++i) {
+        countWordsAndWriteThird(
+            "input",
+            outPath / std::to_string(i)
+        );
+    }
+}
+
+} // namespace
+
+BENCHMARK(benchmarkWithOnlyVector)->
+    Setup(setupBenchWithOnlyVector)->
+    Teardown(teardownBenchWithOnlyVector);
 
 BENCHMARK_MAIN();
